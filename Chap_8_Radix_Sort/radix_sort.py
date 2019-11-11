@@ -11,6 +11,24 @@ class RadixSort:
 		self.original_array = array.copy()
 		self.sorted_array = self.radix_sort()
 
+	def max_number(self):
+		"""
+		Return largest integer in array
+		"""
+		largest = self.array[0]
+		for i in self.array:
+			if(i > largest):
+				largest = i
+		return largest
+
+	def max_number_digits(self):
+		"""
+		Return number of digits of largest integer in array
+		"""
+		largest = self.max_number()
+		max_number_digits = len(str(largest))
+		return max_number_digits
+
 	def get_digit(self, integer, digit_pos):
 		"""
 		Return digit at specified digit position of number
@@ -39,12 +57,10 @@ class RadixSort:
 		"""
 		Run radix sort
 		"""
-		digit_pos = 1
-		while(digit_pos):
-			counting_sorted_array = self.counting_sort(digit_pos)
-			digit_pos += 1
-			if(np.array_equal(self.array, counting_sorted_array)):
-				return counting_sorted_array
+		max_number_digits = self.max_number_digits()
 
-			else:
-				self.array = counting_sorted_array
+		for digit_pos in range(1, max_number_digits + 1):
+			counting_sorted_array = self.counting_sort(digit_pos)
+			self.array = counting_sorted_array
+
+		return counting_sorted_array
