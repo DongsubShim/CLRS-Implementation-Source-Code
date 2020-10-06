@@ -92,4 +92,4 @@ int main()
 
 - graph_bfs_details.hpp - BFS related graph traversal class member function definitions
 
-- graph_dfs_details.hpp - DFS related graph traversal class constructor and common member function definitions
+- graph_dfs_details.hpp - DFS related graph traversal class member function definitions
