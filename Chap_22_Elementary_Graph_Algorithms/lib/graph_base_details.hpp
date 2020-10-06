@@ -37,7 +37,7 @@ void GraphBase::PrintGraph() {
 }
 
 void GraphBase::ResetGraph() {
-    for (int i = 1; i <= MAXV; i++) {
+    for (int i = 0; i <= MAXV; i++) {
         edges[i] = NULL;
         degree[i] = 0;
     }
