@@ -20,7 +20,6 @@
    │   ├── graph_dfs_details.hpp
    │   ├── graph_traversal.hpp
    │   └── graph_traversal_details.hpp
-   ├── test_graph
    └── test_graph.cpp
 ```
 ## Example code in test_graph.cpp
