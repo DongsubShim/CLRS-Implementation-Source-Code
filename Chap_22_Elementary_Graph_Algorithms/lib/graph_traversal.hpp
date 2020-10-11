@@ -5,9 +5,9 @@
 class GraphTraversal : public GraphBase
 {
     public:
-        GraphTraversal() {
-            InitGraphTraversal();
-        };
+        GraphTraversal();
+
+        void PrintParent();
 
         // --- BFS ---
         void PrintBFSParent(int start);
@@ -59,8 +59,6 @@ class GraphTraversal : public GraphBase
         static void DefaultPVL(int v, GraphTraversal* g) {};
 
         static void DefaultPE(int v, int y, GraphTraversal* g) {};
-
-        void InitGraphTraversal();
 
         void UpdateMapping();
 

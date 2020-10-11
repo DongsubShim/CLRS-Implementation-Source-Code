@@ -30,8 +30,6 @@ class GraphBase
 
         void ResetGraph();
 
-        void InitGraphManual();
-
         void AddEdge(int x, int y, int w);
 };
 

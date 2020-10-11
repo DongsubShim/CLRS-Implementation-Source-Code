@@ -2,7 +2,7 @@
 #define GRAPH_TRAVERSAL_DETAILS_HPP_
 #include "graph_traversal.hpp"
 
-void GraphTraversal::InitGraphTraversal() {
+GraphTraversal::GraphTraversal() {
     discovered = new bool[n];
     processed = new bool[n];
     parent = new int[n];
@@ -23,6 +23,17 @@ void GraphTraversal::InitGraphTraversal() {
     scc = new int[n];
     ResetTime();
     ResetForArticulationVertices();
+}
+
+void GraphTraversal::PrintParent() {
+    std::cout << "\n--------------------------- \n";
+    std::cout << "Print Parent" << "\n\n";
+
+    for (const int& i : vertices_set) {
+        std::cout << "Parent of " << i << " is " << parent[mapping[i]] << "\n";
+    }
+
+    std::cout << "\n--------------------------- \n";
 }
 
 void GraphTraversal::UpdateMapping() {
