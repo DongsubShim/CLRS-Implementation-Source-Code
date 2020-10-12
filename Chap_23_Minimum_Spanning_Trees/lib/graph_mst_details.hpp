@@ -33,6 +33,7 @@ void Graph::Prim(int start) {
     int w; // one of the vertices adjacent to v - weight of edge (v, w) is examined for distance update
     int w_map; // mapping of vertex w for array indexing
     int weight; // edge weight for (v, w)
+    int total_weight = 0;
     const Vertex *temp_vertex; // constant pointer to Vertex struct in priority queue
     EdgeNode *p; // temporary pointer to an edge node
     // priority queue for fast retrieval of vertex with lowest edge weight
@@ -56,6 +57,7 @@ void Graph::Prim(int start) {
         // lg n for getting top element from priority queue
         temp_vertex = &q.top(); // constant pointer to Vertex struct at the top of priority queue
         v = temp_vertex -> v;
+        total_weight += *(temp_vertex -> v_distance);
         intree[mapping[v]] = true;
         p = edges[v];
         // update distance using edge weight - after all n iterations, this adds up to m edge examinations
@@ -72,6 +74,7 @@ void Graph::Prim(int start) {
         q.pop();
     }
     PrintMST();
+    std::cout << "\nTotal MST distance is " << total_weight << std::endl;
     ResetParent();
     ResetIntreeAndDistance();
 }
@@ -87,6 +90,7 @@ void Graph::PrimKnownEdges(int start) {
     int w; // one of the vertices adjacent to v - weight of edge (v, w) is examined for distance update
     int w_map; // mapping of vertex w for array indexing
     int weight; // edge weight for (v, w)
+    int total_weight = 0;
     int dist; // smallest edge weight seen so far among all vertices not in MST
     int j_map; // mapping of vertex j for array indexing
     int j_distance; // known smallest edge weight involving vertex j
@@ -97,6 +101,7 @@ void Graph::PrimKnownEdges(int start) {
     while(intree[mapping[v]] == false) {
         intree[mapping[v]] = true; // include vertex v in MST - v has the smallest edge weight among those not in MST
         p = edges[v]; // pointer to v's edges
+        total_weight += distance[mapping[v]];
         while(p != NULL) {
             w = p -> y; // get end-point of an edge pointed by p
             weight = p -> weight; // get edge weight
@@ -125,8 +130,58 @@ void Graph::PrimKnownEdges(int start) {
         }
     }
     PrintMST();
+    std::cout << "\nTotal MST distance is " << total_weight << std::endl;
     ResetParent();
     ResetIntreeAndDistance();
+}
+
+void Graph::EdgeToArray(std::priority_queue<EdgePair, std::vector<EdgePair>, CompareEdge> *q) {
+    EdgeNode *p;
+    EdgePair ep;
+    for (const int& i : vertices_set) {
+        ep.v = i;
+        p = edges[i];
+        while(p != NULL) {
+            ep.w = p -> y;
+            ep.weight = p -> weight;
+            (*q).push(ep);
+            p = p -> next;
+        }
+    }
+}
+
+void Graph::Kruskal() {
+    /* O(m lg m) */
+    int v;
+    int v_map;
+    int w;
+    int w_map;
+    int total_weight = 0;
+    SetUnion s(num_vertices);
+    std::priority_queue<EdgePair, std::vector<EdgePair>, CompareEdge> q;
+    EdgeNode *p;
+    const EdgePair *ep;
+    
+    EdgeToArray(&q);
+
+    while(!q.empty()) {
+        ep = &q.top();
+        v = ep -> v;
+        v_map = mapping[v];
+        w = ep -> w;
+        w_map = mapping[w];
+        if (!s.IsSamePartition(v_map, w_map) && parent[w_map] == -1) {
+            parent[w_map] = v;
+            s.Union(v_map, w_map);
+            total_weight += ep -> weight;
+        }
+        q.pop();
+    }
+    PrintMST();
+    std::cout << "\nTotal MST distance is " << total_weight << std::endl;
+    ResetParent();
+    ResetIntreeAndDistance();
+    // s.~SetUnion();
 }
 
 #endif // GRAPH_MST_DETAILS_HPP_
