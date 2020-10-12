@@ -11,7 +11,6 @@ class SetUnion
             p = new int[num_elements];
             size = new int[num_elements];
             num = num_elements;
-
             for (int i = 0; i < num_elements; i++) {
                 p[i] = i;
                 size[i] = 1;
@@ -93,7 +92,14 @@ class CompareEdge {
 class Graph : public GraphTraversal
 {
     public:
-        Graph();
+
+        Graph(std::vector<std::vector<int>> edge_vector, bool is_directed) : GraphTraversal(edge_vector, is_directed) {
+            InitGraph();
+        }
+
+        Graph() {
+            InitGraph();
+        }
 
         void PrimKnownEdges(int start);
 
@@ -104,6 +110,8 @@ class Graph : public GraphTraversal
     protected:
         bool *intree; // pointer to boolean array which indicates if each vertex belongs to MST
         int *distance; // pointer to integer array representing known smallest edge weight for each vertex
+
+        void InitGraph();
 
         void ResetIntreeAndDistance();
 

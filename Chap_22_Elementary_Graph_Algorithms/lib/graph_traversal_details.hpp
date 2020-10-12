@@ -2,28 +2,6 @@
 #define GRAPH_TRAVERSAL_DETAILS_HPP_
 #include "graph_traversal.hpp"
 
-GraphTraversal::GraphTraversal() {
-    discovered = new bool[n];
-    processed = new bool[n];
-    parent = new int[n];
-    mapping = new int[MAXV+1];
-    UpdateMapping();
-    ResetDiscoveredAndProcessed();
-    ResetParent();
-    // BFS
-    color = new int[n];
-    // DFS
-    entry_time = new int[n];
-    exit_time = new int[n];
-    reachable_ancestor = new int[n];
-    tree_out_degree = new int[n];
-    current_time = 0;
-    finished = false;
-    low = new int[n];
-    scc = new int[n];
-    ResetTime();
-    ResetForArticulationVertices();
-}
 
 void GraphTraversal::PrintParent() {
     std::cout << "\n--------------------------- \n";
@@ -45,16 +23,40 @@ void GraphTraversal::UpdateMapping() {
 }
 
 void GraphTraversal::ResetParent() {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < num_vertices; i++) {
         parent[i] = -1;
     }
 }
 
 void GraphTraversal::ResetDiscoveredAndProcessed() {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < num_vertices; i++) {
         discovered[i] = false;
         processed[i] = false;
     }
 }
+
+void GraphTraversal::InitGraphTraversal() {
+    discovered = new bool[num_vertices];
+    processed = new bool[num_vertices];
+    parent = new int[num_vertices];
+    mapping = new int[MAXV+1];
+    UpdateMapping();
+    ResetDiscoveredAndProcessed();
+    ResetParent();
+    // BFS
+    color = new int[num_vertices];
+    // DFS
+    entry_time = new int[num_vertices];
+    exit_time = new int[num_vertices];
+    reachable_ancestor = new int[num_vertices];
+    tree_out_degree = new int[num_vertices];
+    current_time = 0;
+    finished = false;
+    low = new int[num_vertices];
+    scc = new int[num_vertices];
+    ResetTime();
+    ResetForArticulationVertices();
+}
+
 
 #endif // GRAPH_TRAVERSAL_DETAILS_HPP_

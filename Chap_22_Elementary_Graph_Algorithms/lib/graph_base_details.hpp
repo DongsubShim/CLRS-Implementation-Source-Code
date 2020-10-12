@@ -43,6 +43,19 @@ void GraphBase::ResetGraph() {
     }
 }
 
+
+void GraphBase::AddEdge(int x, int y, int w) {
+    EdgeNode *temp;
+    temp = new EdgeNode;
+    temp -> y = y;
+    temp -> weight = w;
+    temp -> next = edges[x];
+    edges[x] = temp;
+    degree[x] ++;
+    vertices_set.insert(x);
+    vertices_set.insert(y);
+}
+
 GraphBase::GraphBase() {
     int i, m, x, y, w;
 
@@ -64,20 +77,30 @@ GraphBase::GraphBase() {
 
         num_edges ++;
     }
-
-    n = vertices_set.size();
 }
 
-void GraphBase::AddEdge(int x, int y, int w) {
-    EdgeNode *temp;
-    temp = new EdgeNode;
-    temp -> y = y;
-    temp -> weight = w;
-    temp -> next = edges[x];
-    edges[x] = temp;
-    degree[x] ++;
-    vertices_set.insert(x);
-    vertices_set.insert(y);
+
+GraphBase::GraphBase(std::vector<std::vector<int>> edge_vector, bool is_directed) {
+    int i, m, x, y, w;
+
+    ResetGraph();
+
+    directed = is_directed;
+    m = edge_vector.size();
+
+    for (int i = 0; i < m; i ++) {
+        x = edge_vector[i][0];
+        y = edge_vector[i][1];
+        w = edge_vector[i][2];
+
+        AddEdge(x, y, w);
+        
+        if (!directed) 
+            AddEdge(y, x, w);
+
+        num_edges ++;
+    }
+    num_vertices = vertices_set.size();    
 }
 
 #endif // GRAPH_TRAVERSAL_DETAILS_HPP_

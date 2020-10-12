@@ -3,14 +3,14 @@
 #include "graph_traversal.hpp"
 
 void GraphTraversal::ResetTime() {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < num_vertices; i++) {
         entry_time[i] = 0;
         exit_time[i] = 0;
     }
 }
 
 void GraphTraversal::ResetForArticulationVertices() {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < num_vertices; i++) {
         reachable_ancestor[i] = 0;
         tree_out_degree[i] = 0;
     }

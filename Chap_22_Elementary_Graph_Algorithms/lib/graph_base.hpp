@@ -15,6 +15,8 @@ typedef struct EdgeNode
 class GraphBase 
 {
     public:
+        GraphBase(std::vector<std::vector<int>> edge_vector, bool is_directed);
+
         GraphBase();
 
         void PrintGraph();
@@ -23,10 +25,11 @@ class GraphBase
         EdgeNode *edges[MAXV+1];
         int degree[MAXV+1];
         std::set<int> vertices_set;
-        int num_vertices;
         int num_edges;
         bool directed;
-        int n;
+        int num_vertices;
+
+        void BuildGraphInteractively();
 
         void ResetGraph();
 

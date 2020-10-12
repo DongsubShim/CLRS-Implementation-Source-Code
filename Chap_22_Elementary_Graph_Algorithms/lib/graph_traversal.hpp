@@ -5,7 +5,14 @@
 class GraphTraversal : public GraphBase
 {
     public:
-        GraphTraversal();
+
+        GraphTraversal(std::vector<std::vector<int>> edge_vector, bool is_directed) : GraphBase(edge_vector, is_directed) {
+            InitGraphTraversal();
+        }
+
+        GraphTraversal() {
+            InitGraphTraversal();
+        }
 
         void PrintParent();
 
@@ -54,6 +61,8 @@ class GraphTraversal : public GraphBase
         
 
         // --- Protected Methods ---
+        void InitGraphTraversal();
+
         static void DefaultPVE(int v, GraphTraversal* g) {};
 
         static void DefaultPVL(int v, GraphTraversal* g) {};
