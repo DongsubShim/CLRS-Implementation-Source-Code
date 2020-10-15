@@ -107,6 +107,8 @@ class Graph : public GraphTraversal
 
         void Kruskal();
 
+        void Dijkstra(int start);
+
     protected:
         bool *intree; // pointer to boolean array which indicates if each vertex belongs to MST
         int *distance; // pointer to integer array representing known smallest edge weight for each vertex
@@ -116,6 +118,10 @@ class Graph : public GraphTraversal
         void ResetIntreeAndDistance();
 
         void PrintMST();
+
+        void PrintDijkstraDistanceAndPath(int start);
+
+        void PrintDijkstraPath(int i, int start);
 
         void UnionFind();
 
@@ -127,5 +133,6 @@ class Graph : public GraphTraversal
 
 #include "graph_details.hpp"
 #include "graph_mst_details.hpp"
+#include "graph_dijkstra.hpp"
 
 #endif // GRAPH_HPP_

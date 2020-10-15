@@ -24,7 +24,7 @@ class GraphBase
     protected:
         EdgeNode *edges[MAXV+1];
         int degree[MAXV+1];
-        std::set<int> vertices_set;
+        std::unordered_set<int> vertices_set;
         int num_edges;
         bool directed;
         int num_vertices;
