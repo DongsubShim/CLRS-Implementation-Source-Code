@@ -1,5 +1,5 @@
-#ifndef GRAPH_DIJKSTRA_HPP_
-#define GRAPH_DIJKSTRA_HPP_
+#ifndef GRAPH_DIJKSTRA_DETAILS_HPP_
+#define GRAPH_DIJKSTRA_DETAILS_HPP_
 #include "graph.hpp"
 
 void Graph::PrintDijkstraPath(int i, int start) {
@@ -84,4 +84,4 @@ void Graph::Dijkstra(int start) {
     ResetIntreeAndDistance();
 }
 
-#endif // GRAPH_DIJKSTRA_HPP_
+#endif // GRAPH_DIJKSTRA_DETAILS_HPP_

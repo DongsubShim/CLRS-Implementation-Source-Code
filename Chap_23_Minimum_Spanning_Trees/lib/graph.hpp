@@ -133,6 +133,6 @@ class Graph : public GraphTraversal
 
 #include "graph_details.hpp"
 #include "graph_mst_details.hpp"
-#include "graph_dijkstra.hpp"
+#include "graph_dijkstra_details.hpp"
 
 #endif // GRAPH_HPP_
