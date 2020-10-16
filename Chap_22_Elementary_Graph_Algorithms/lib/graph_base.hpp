@@ -10,6 +10,11 @@ typedef struct EdgeNode
     int y;
     EdgeNode *next;
 
+    // for flow networks
+    int capacity;
+    int residual;
+    int flow;
+
 } EdgeNode;
 
 class GraphBase 
